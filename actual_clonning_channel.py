@@ -17,7 +17,7 @@ utils.get_peer_type = get_peer_type_new
 
 API_ID = 27796627
 API_HASH = '6c1421d554df1927173c6f6871097beb'
-SOURCE_CHANNEL_ID = -1002286285890
+SOURCE_CHANNEL_ID = -1002414449317
 TARGET_CHANNEL_ID = -1002401059843
 
 app = Client("my_account", api_id=API_ID, api_hash=API_HASH)
@@ -45,6 +45,8 @@ async def forward_messages(client, message):
         elif message.text:
             new_text = message.text + source_link_text
             await app.send_message(chat_id=TARGET_CHANNEL_ID, text=new_text)
+        elif message.photo:
+            await message.copy(chat_id=TARGET_CHANNEL_ID, caption=source_link_text)
         else:
             await message.copy(chat_id=TARGET_CHANNEL_ID)
         
